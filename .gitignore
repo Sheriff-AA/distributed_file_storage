@@ -7,7 +7,9 @@
 *.dll
 *.so
 *.dylib
-
+/bin
+/vendor
+go.sum
 # Test binary, built with `go test -c`
 *.test
 

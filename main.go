@@ -1,7 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"log"
+
+	"github.com/Sheriff-AA/distributed_file_storage/p2p"
+)
 
 func main() {
-	fmt.Println("We Gucci")
+	tr := p2p.NewTCPTransport(":3000")
+
+	if err := tr.ListenAndAccept(); err != nil {
+		log.Fatal(err)
+	}
+
+	select {}
+
+	// fmt.Println("We Gucci")
 }

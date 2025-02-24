@@ -2,6 +2,7 @@ package p2p
 
 // Peer is an interface that represents the remote node
 type Peer interface {
+	close() error
 }
 
 // Transport is anything that handles the communication
@@ -9,4 +10,5 @@ type Peer interface {
 // (TCP, UCP, websockets,...)
 type Transport interface {
 	ListenAndAccept() error
+	Consume() <-chan RPC
 }

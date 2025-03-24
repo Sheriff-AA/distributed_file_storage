@@ -22,7 +22,7 @@ func NewTCPPeer(conn net.Conn, outbound bool) *TCPPeer {
 }
 
 // close implements the peer interface
-func (p *TCPPeer) close() error {
+func (p *TCPPeer) Close() error {
 	return p.conn.Close()
 }
 
@@ -102,9 +102,10 @@ func (t *TCPTransport) handleConn(conn net.Conn) {
 	// Read Loop
 	rpc := RPC{}
 	for {
-		if err := t.Decoder.Decode(conn, &rpc); err != nil {
-			fmt.Printf("TCP error: %s\n", err)
-			continue
+		err := t.Decoder.Decode(conn, &rpc)
+
+		if err != nil {
+			return
 		}
 
 		rpc.From = conn.RemoteAddr()

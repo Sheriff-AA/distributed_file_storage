@@ -46,13 +46,13 @@ func main() {
 	go s3.Start()
 	time.Sleep(2 * time.Second)
 
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 2; i++ {
 		// key := "coolPicture.jpg"
 		key := fmt.Sprintf("picture_%d.png", i)
 		data := bytes.NewReader([]byte("my big data file here!"))
 		s3.Store(key, data)
 
-		if err := s3.store.Delete(key); err != nil {
+		if err := s3.store.Delete(s3.ID, key); err != nil {
 			log.Fatal(err)
 		}
 
